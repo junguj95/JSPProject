@@ -5,10 +5,10 @@ import java.sql.Date;
 //VO(Value Object) = DTO(Data Transfer Object) = Java Beans
 public class Member {
 	private String id;
-	private String passwd;
+	private String pwd;
 	private String name;
-	private int age;
 	private String gender;
+	private int age;
 	private String addr;
 	private String regDate;
 	
@@ -19,11 +19,11 @@ public class Member {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getPasswd() {
-		return passwd;
+	public String getPwd() {
+		return pwd;
 	}
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 	public String getName() {
 		return name;

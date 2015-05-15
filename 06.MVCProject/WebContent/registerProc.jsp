@@ -13,10 +13,16 @@
 	
     MemberDAO dao = new MemberDAO();
     
-    Member member = new Member(); //캐리어 역할
+    Member member = new Member(); //캐리어 역할 멤버 객체를 만들어서
     
     member.setId(id); //값 저장
+    member.setPwd(pwd);
+    member.setName(name);
+    member.setGender(gender);
+    member.setAge(Integer.parseInt(age));
+    member.setAddr(addr);
     
+    //3. SQL문 실행
     dao.insertMember(member); //보내기
     
     
