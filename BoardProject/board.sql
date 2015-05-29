@@ -18,5 +18,8 @@ insert into board
 values(board_seq.nextval,'이름','제목','내용',0,default,'파일경로' )
 
 select * from board
+order by num desc
 
 drop table board
+
+select * from board order by num desc

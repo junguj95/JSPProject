@@ -1,34 +1,23 @@
-package board.action;
+package board.action; //글쓰기 form액션
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.dao.BoardDao;
-import board.dto.Board;
-
-public class BoardListAction implements Action {
+public class BoardWriteFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("ddfdasfe");
+		String url = "./board/write.jsp";
 		
-		BoardDao dao = new BoardDao();
-		List<Board> list = dao.selectAllBoards();
-		
-		
-		request.setAttribute("list", list);
-		
-		String url = "./board/list.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		
 		dispatcher.forward(request, response);
-
 	}
 
 }
