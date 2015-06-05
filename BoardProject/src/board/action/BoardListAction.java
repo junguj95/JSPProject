@@ -22,7 +22,7 @@ public class BoardListAction implements Action {
 		List<Board> list = dao.selectAllBoards();
 		
 		
-		request.setAttribute("list", list);
+		request.setAttribute("list", list); // request영역에 데이터 저장
 		
 		String url = "./board/list.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);

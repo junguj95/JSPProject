@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@page import = "board.dto.*" %>
 <!DOCTYPE html>
 
 <html>
 	<head>
 		<title>JSP/Servlet Example</title>
-		<link rel="Stylesheet" type="text/css" href="../css/bootstrap.css"></link>
+		<link rel="Stylesheet" type="text/css" href="./css/bootstrap.css"></link>
 	</head>
 	
 	<body>
@@ -30,7 +32,10 @@
 		  </div>
 		</nav>
 		
-		<!-- 게시판 글쓰기  시작  -->
+		<!-- 게시판 상세보기 시작  -->
+		<%
+			Board board = (Board) request.getAttribute("board");
+		%>
 		<form class="form-horizontal">
 		  <fieldset>
 		    <legend>게시판 내용  </legend>
@@ -38,23 +43,31 @@
 		    <div class="form-group">
 		      <label for="inputEmail" class="col-lg-2 control-label">이름 : </label>
 		      <div class="col-lg-10">
-		        이름 
+		        <%=board.getName() %> 
 		      </div>
 		    </div>
 		    
 		    <div class="form-group">
 		      <label for="inputEmail" class="col-lg-2 control-label">제목 : </label>
 		      <div class="col-lg-10">
-		        제목 
+		        <%=board.getTitle() %> 
 		      </div>
 		    </div>
-		   
+		      
+		    <div class="form-group">
+		      <label for="inputEmail" class="col-lg-2 control-label">파일 : </label>
+		      <div class="col-lg-10">
+		        <a href = "./upload/<%=board.getAttachment() %>"> <%=board.getAttachment() %> </a>
+		      </div>
+		    </div>
+		    
 		    <div class="form-group">
 		      <label for="textArea" class="col-lg-2 control-label">내용 : </label>
 		      <div class="col-lg-10">
-		        내용 
+		        <%=board.getContent() %> 
 		      </div>
 		    </div>
+		
 		    <div class="form-group">
 		      <div class="col-lg-10 col-lg-offset-2">
 		        <a href="update.jsp" class="btn btn-default">수정하기</a>

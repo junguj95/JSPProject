@@ -31,7 +31,7 @@
 		</nav>
 		
 		<!-- 게시판 글쓰기  시작  -->
-		<form class="form-horizontal" method="post" action="write.uijin">
+		<form class="form-horizontal" method="post" enctype = "multipart/form-data"action="write.uijin">
 		  <fieldset>
 		    <legend>게시판 글쓰기 </legend>
 		    

@@ -35,7 +35,7 @@ public class BoardDao {
 	
 	
 	public int insertBoard(Board board){
-		String sql = "insert into board values(board_seq.nextval, ?, ?, ?, default, default, 'file')";
+		String sql = "insert into board values(board_seq.nextval, ?, ?, ?, default, default, ?)";
 		
 		try {
 			
@@ -44,6 +44,7 @@ public class BoardDao {
 			pstmt.setString(1,board.getName());
 			pstmt.setString(2,board.getTitle());
 			pstmt.setString(3,board.getContent());
+			pstmt.setString(4,board.getAttachment());
 			
 			int result = pstmt.executeUpdate(); //리턴타입 int
 			
@@ -88,10 +89,48 @@ public class BoardDao {
 		return list;
 	}
 	
-	public Board seletOnBoardByNum(int num){
-		return null;
+	// 상세보기
+	public Board selectOneBoardByNum(int num){ //보드객체가 글 하나
+		String sql = "select * from board where num = ?"; //물음표 주면 바인딩pstmt.setInt(1, num);
+		Board board = new Board();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, num); //바인딩
+			
+			ResultSet rs = pstmt.executeQuery(); //rs는 0부터 시작이라 next해주어야함
+			if(rs.next());{
+				
+				board.setNum(rs.getInt("num"));
+				board.setName(rs.getString("Name"));
+				board.setTitle(rs.getString("Title"));
+				board.setContent(rs.getString("Content"));
+				board.setAttachment(rs.getString("attachment"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return board; //리턴해서
 	}
+	
+	//조회수 증가
 	public void updateHits(int num){
+		String sql = "update board set hits = hits + 1 where num = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, num);
+			
+			pstmt.executeUpdate();//int result = pstmt.executeUpdate(); //executeUpdate는 int
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 	public int updateBoard(Board board){
