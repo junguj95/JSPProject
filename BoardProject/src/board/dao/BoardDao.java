@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import board.dto.Board;
+import board.util.DBManager;
 
 public class BoardDao {
 	private Connection con = null;
@@ -99,7 +100,7 @@ public class BoardDao {
 			
 			pstmt.setInt(1, num); //바인딩
 			
-			ResultSet rs = pstmt.executeQuery(); //rs는 0부터 시작이라 next해주어야함
+			ResultSet rs = pstmt.executeQuery(); 
 			if(rs.next());{
 				
 				board.setNum(rs.getInt("num"));
@@ -112,7 +113,7 @@ public class BoardDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return board; //리턴해서
+		return board; //리턴
 	}
 	
 	//조회수 증가
@@ -134,10 +135,40 @@ public class BoardDao {
 		
 	}
 	public int updateBoard(Board board){
+		String sql = "update board set name=?, title=?, content=?, attachment=? where num=?";
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, board.getName());
+			pstmt.setString(2, board.getTitle());
+			pstmt.setString(3, board.getContent());
+			pstmt.setString(4, board.getAttachment());
+			pstmt.setInt(5, board.getNum());
+			
+			int result = pstmt.executeUpdate();
+			
+			if(result != 0)
+				return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return 0;
+		
 	}
+	
 	public int deleteBoard(int num){
-		return 0;
+		String sql = "delete from board where num=?";
+		try {
+			con = DBManager.getConnection();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return num;
 	}
 }
 

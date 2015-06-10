@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.action.Action;
+import board.action.BoardDeleteAction;
 import board.action.BoardListAction;
+import board.action.BoardUpdateAction;
+import board.action.BoardUpdateFormAction;
 import board.action.BoardViewAction;
 import board.action.BoardWriteAction;
 import board.action.BoardWriteFormAction;
@@ -80,11 +83,35 @@ public class BoardController extends HttpServlet {
 		}
 		
 		//상세보기
-				else if(command.equals("/view.uijin")){
-					Action action = new BoardViewAction();
-					action.execute(request, response);
-					
-				}
+		else if(command.equals("/view.uijin")){
+			Action action = new BoardViewAction();
+			action.execute(request, response);
+			}
+		
+		
+		
+		//삭제하기
+		else if(command.equals("/delete.uijin")){
+			Action action = new BoardDeleteAction();
+			action.execute(request, response);
+					}
+		
+		
+		//수정하기
+		else if(command.equals("/update.uijin")){
+			Action action = new BoardUpdateAction();
+			action.execute(request, response);
+					}
+		
+	
+		
+		//수정 폼
+		else if(command.equals("/updateForm.uijin")){
+			Action action = new BoardUpdateFormAction();
+			action.execute(request, response);
+				
+		}
 	}
-
 }
+
+
